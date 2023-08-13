@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>提取超链接的链接和名称</title>
+    <script>
+        function extractLinks() {
+            var inputText = document.getElementById("inputText").value; // 获取输入的文本
+            var extractedLinks = [];
+            
+            // 创建一个临时div元素来容纳输入的文本
+            var tempDiv = document.createElement("div");
+            tempDiv.innerHTML = inputText;
+            
+            // 获取所有的超链接元素
+            var links = tempDiv.getElementsByTagName("a");
+            
+            // 提取超链接的链接和名称
+            for (var i = 0; i < links.length; i++) {
+                var link = links[i];
+                var url = link.href;
+                var text = link.textContent;
+                
+                extractedLinks.push(text); // 添加名称到数组中
+                extractedLinks.push(url); // 添加链接到数组中
+            }
+            
+            // 将提取的链接和名称按一行名称一行链接的格式输出
+            var outputText = extractedLinks.join("\n");
+            
+            document.getElementById("outputText").textContent = outputText; // 显示结果
+        }
+    </script>
+</head>
+<body>
+    <label for="inputText">输入文本：</label>
+    <textarea id="inputText" rows="5" cols="50"></textarea>
+    <br>
+    <button onclick="extractLinks()">提取超链接</button>
+    <br>
+    <label for="outputText">提取结果：</label>
+    <textarea id="outputText" rows="5" cols="50" readonly></textarea>
+</body>
+</html>
